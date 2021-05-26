@@ -8,20 +8,17 @@ char x='0';
 long duration;
 int distance;
 
-int button1 = 12;     // the number of the first touch sensor
-int button2 =  13;      // the number of the second touch sensor
+int button1 = 12;     // the pin of the first touch sensor
+int button2 =  13;      // the pin of the second touch sensor
 int buttonState1 = 0;
 int buttonState2 = 0;
 
 
 void setup() {
   BT.begin(9600);
-
-  pinMode(10,OUTPUT);
-  pinMode(9,OUTPUT);
-
-  pinMode(5,OUTPUT);
-  pinMode(4,OUTPUT);
+  pinMode(9,OUTPUT); // PWM of motor
+  pinMode(5,OUTPUT); // First motor connection
+  pinMode(4,OUTPUT); // Secon motor connection
 
   digitalWrite(5,LOW);
   digitalWrite(4,LOW);
@@ -29,6 +26,7 @@ void setup() {
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an OUTPUT
   pinMode(echoPin, INPUT); // Sets the echoPin as an INPUT
   Serial.begin(9600);
+  
   pinMode(button1, INPUT);
   pinMode(button2, INPUT);
 
@@ -36,6 +34,7 @@ void setup() {
 
 void loop() {
   
+//------------------Ultrasonic Sensor------------------
  // Clears the trigPin condition
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
@@ -53,7 +52,7 @@ void loop() {
   Serial.println(" cm");
 
 
-if (distance<5) {
+if (distance<7) {
     digitalWrite(5,LOW);
     digitalWrite(4,HIGH);
     analogWrite(9,255);
@@ -70,7 +69,10 @@ if (distance<5) {
     digitalWrite(4,LOW);
     analogWrite(9,0);
   }
-  
+
+
+
+  //------------------NXT Touch Sensor------------------
   buttonState1 = digitalRead(button1);
   buttonState2 = digitalRead(button2);
 
@@ -93,29 +95,3 @@ if (distance<5) {
     digitalWrite(4,HIGH);
     analogWrite(9,255);
   }
-
-  while(BT.available())
-  {
-    x=BT.read();
-    if(x=='1') //move up
-    {
-      digitalWrite(5,LOW);
-      digitalWrite(4,HIGH);
-      analogWrite(9,255);
-    }
-
-        if(x=='2') //move down
-    {
-      digitalWrite(5,HIGH);
-      digitalWrite(4,LOW);
-      analogWrite(9,255);
-    }
-    
-        if(x=='0') //stop
-    {
-      digitalWrite(5,LOW);
-      digitalWrite(4,LOW);
-      analogWrite(9,0);
-    }
-  }
-}
