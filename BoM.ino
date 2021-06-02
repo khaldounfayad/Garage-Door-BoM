@@ -3,7 +3,6 @@ int analogPin2 = A1;                   // outside leads to ground and +5V
 int val;
 int val2;
 
-
 #define echoPin 7
 #define trigPin 6
 long duration; // variable for the duration of sound wave travel
@@ -50,29 +49,7 @@ val2 = analogRead(analogPin2);
 
 if(distance > 20){
 
-//-----------------Buttons------------------
-    if (val==0){
-    digitalWrite(5,LOW);
-    digitalWrite(4,HIGH);
-    analogWrite(9,127);
-    delay(100);
-   }
-
-   if (val2==0){
-    digitalWrite(5,HIGH);
-    digitalWrite(4,LOW);
-    analogWrite(9,127);
-    delay(100);
-   }
-
-   else {
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-   }
-
-//------------------Bluetooth------------------
-while(BT.available())
+  if(BT.available())
   {
     x=BT.read();
     if(x=='1') //move up
@@ -87,32 +64,39 @@ while(BT.available())
       digitalWrite(4,LOW);
       analogWrite(9,127);
     }
-        if(x=='0') //stop
+     if(x=='0') //stop
     {
       digitalWrite(5,LOW);
       digitalWrite(4,LOW);
       analogWrite(9,0);
     }
+    delay(10);
   }
+    if (val==0){
+    digitalWrite(5,LOW);
+    digitalWrite(4,HIGH);
+    analogWrite(9,127);
+    delay(10);
+   }
+
+   if (val2==0){
+    digitalWrite(5,HIGH);
+    digitalWrite(4,LOW);
+    analogWrite(9,127);
+    delay(10);
+   }
+   
+    else {
+    digitalWrite(5,LOW);
+    digitalWrite(4,LOW);
+    analogWrite(9,0);
+    delay(10);
+   }  
 }  
 
 else if(distance <= 20){
 
-//-----------------Buttons------------------
-  if (val==0){
-    digitalWrite(5,LOW);
-    digitalWrite(4,HIGH);
-    analogWrite(9,127);
-    delay(100);
-   }
-   else {
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-   }
-
-//------------------Bluetooth------------------
-   while(BT.available())
+ if(BT.available())
   {
     x=BT.read();
     if(x=='1') //move up
@@ -121,12 +105,28 @@ else if(distance <= 20){
       digitalWrite(4,HIGH);
       analogWrite(9,127);
     }
-        if(x=='0') //stop
+
+    if(x=='0') //stop
     {
       digitalWrite(5,LOW);
       digitalWrite(4,LOW);
       analogWrite(9,0);
     }
+     delay(10);
   }
-}
+
+  if (val==0){
+    digitalWrite(5,LOW);
+    digitalWrite(4,HIGH);
+    analogWrite(9,127);
+    delay(10);
+   }
+
+   else{
+    digitalWrite(5,LOW);
+    digitalWrite(4,LOW);
+    analogWrite(9,0);
+    delay(10);
+   } 
+ }
 }
