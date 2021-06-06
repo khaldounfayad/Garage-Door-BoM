@@ -49,7 +49,29 @@ val2 = analogRead(analogPin2);
 
 if(distance > 20){
 
-  if(BT.available())
+  }
+    if (val==0){
+    digitalWrite(5,LOW);
+    digitalWrite(4,HIGH);
+    analogWrite(9,127);
+    delay(10);
+   }
+
+   if (val2==0){
+    digitalWrite(5,HIGH);
+    digitalWrite(4,LOW);
+    analogWrite(9,225);
+    delay(10);
+   }
+   
+    else {
+    digitalWrite(5,LOW);
+    digitalWrite(4,LOW);
+    analogWrite(9,0);
+    delay(10);
+   }  
+
+     if(BT.available())
   {
     x=BT.read();
     if(x=='1') //move up
@@ -71,32 +93,26 @@ if(distance > 20){
       analogWrite(9,0);
     }
     delay(10);
-  }
-    if (val==0){
-    digitalWrite(5,LOW);
-    digitalWrite(4,HIGH);
-    analogWrite(9,127);
-    delay(10);
-   }
-
-   if (val2==0){
-    digitalWrite(5,HIGH);
-    digitalWrite(4,LOW);
-    analogWrite(9,127);
-    delay(10);
-   }
-   
-    else {
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-    delay(10);
-   }  
 }  
 
 else if(distance <= 20){
 
- if(BT.available())
+
+  if (val==0){
+    digitalWrite(5,LOW);
+    digitalWrite(4,HIGH);
+    analogWrite(9,225);
+    delay(10);
+   }
+
+   else{
+    digitalWrite(5,LOW);
+    digitalWrite(4,LOW);
+    analogWrite(9,0);
+    delay(10);
+   }
+
+    if(BT.available())
   {
     x=BT.read();
     if(x=='1') //move up
@@ -114,19 +130,5 @@ else if(distance <= 20){
     }
      delay(10);
   }
-
-  if (val==0){
-    digitalWrite(5,LOW);
-    digitalWrite(4,HIGH);
-    analogWrite(9,127);
-    delay(10);
-   }
-
-   else{
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-    delay(10);
-   } 
  }
 }
