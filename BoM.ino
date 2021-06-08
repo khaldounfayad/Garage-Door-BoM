@@ -50,26 +50,19 @@ val2 = analogRead(analogPin2);
 if(distance > 20){
 
   }
-    if (val==0){
+    while (val==0){
     digitalWrite(5,LOW);
     digitalWrite(4,HIGH);
     analogWrite(9,127);
     delay(10);
    }
 
-   if (val2==0){
+   while (val2==0){
     digitalWrite(5,HIGH);
     digitalWrite(4,LOW);
     analogWrite(9,225);
     delay(10);
    }
-   
-    else {
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-    delay(10);
-   }  
 
      if(BT.available())
   {
@@ -98,19 +91,13 @@ if(distance > 20){
 else if(distance <= 20){
 
 
-  if (val==0){
+  while (val==0){
     digitalWrite(5,LOW);
     digitalWrite(4,HIGH);
     analogWrite(9,225);
     delay(10);
    }
 
-   else{
-    digitalWrite(5,LOW);
-    digitalWrite(4,LOW);
-    analogWrite(9,0);
-    delay(10);
-   }
 
     if(BT.available())
   {
@@ -130,5 +117,6 @@ else if(distance <= 20){
     }
      delay(10);
   }
+
  }
 }
